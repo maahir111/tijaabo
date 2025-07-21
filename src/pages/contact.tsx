@@ -49,10 +49,10 @@ const [result, setResult] = React.useState("");
 const [showResult, setShowResult] = useState(false);
 
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Sending....");
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
 
     formData.append("access_key", "b7dce00f-c89f-4a65-959c-37d8973e8a02");
 

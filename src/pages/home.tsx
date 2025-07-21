@@ -5,15 +5,14 @@ import { Users2 } from "lucide-react";
 import { Lightbulb } from "lucide-react";
 import { Eye } from "lucide-react";
 import { Target } from "lucide-react";
-
-
-import {
-  pageTransition,
-  staggerContainer,
-  childVariant,
-  heroPatternCSS,
-} from "@/lib/utils";
+import {pageTransition, staggerContainer, childVariant, heroPatternCSS,} from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const variants = {
+  initial: { x: 300, opacity: 0, },
+  animate: { x: 0, opacity: 1, },
+  exit: { x: -300, opacity: 0, },
+};
 
 type Testimonial = {
   _id: string;
@@ -149,11 +148,7 @@ useEffect(() => {
   window.scrollTo(0, 0);
 }, []);
 
-const variants = {
-  initial: { x: 300, opacity: 0, position: "absolute", width: "100%" },
-  animate: { x: 0, opacity: 1, position: "relative", width: "100%" },
-  exit: { x: -300, opacity: 0, position: "absolute", width: "100%" },
-};
+
 
   return (
     <motion.div
@@ -1170,6 +1165,7 @@ const variants = {
               <motion.div
                 key={current}
                 className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                style={{ position: "absolute", width: "100%" }}
                 variants={variants}
                 initial="initial"
                 animate="animate"
