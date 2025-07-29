@@ -23,7 +23,7 @@ function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
     <div className="bg-white rounded-lg shadow-md p-4">
       {image && (
         <img
-          src={image?.startsWith('http') ? image : `http://localhost:5000${image}`}
+          src={image?.startsWith('http') ? image : `https://back123-in3w.onrender.com${image}`}
           alt={fullName}
           className="w-full h-48 object-cover rounded-lg mb-4"
         />

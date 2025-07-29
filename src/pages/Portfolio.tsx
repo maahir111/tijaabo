@@ -30,7 +30,7 @@ function PortfolioPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/projects")
+    fetch("https://back123-in3w.onrender.com/api/projects")
       .then((res) => res.json())
       .then((data) => {
         setProjects(data);
@@ -79,7 +79,7 @@ function PortfolioPage() {
               className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
               <img
-                src={project.image?.startsWith('http') ? project.image : `http://localhost:5000${project.image}`}
+                src={project.image?.startsWith('http') ? project.image : `https://back123-in3w.onrender.com${project.image}`}
                 alt={project.title}
                 className="w-full h-48 object-cover"
               />
