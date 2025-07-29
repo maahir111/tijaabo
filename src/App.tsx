@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ThemeProvider } from "@/hooks/use-theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 import PrivateRoute from "./dhasbord/PrivateRoute";
 
@@ -46,7 +45,6 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
         <BrowserRouter>
           <div className="min-h-screen bg-white dark:bg-[#1E293B]">
             <Suspense fallback={<LoadingSpinner />}>
@@ -85,7 +83,6 @@ function App() {
             <Toaster />
           </div>
         </BrowserRouter>
-      </ThemeProvider>
     </QueryClientProvider>
   );
 }
