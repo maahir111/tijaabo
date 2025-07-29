@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, NavLink } from "react-router-dom";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
