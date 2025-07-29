@@ -3,8 +3,16 @@ import { FaSearch, FaTrash, FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from './config';
 
+type ProjectType = {
+  _id: string;
+  image: string;
+  title: string;
+  description: string;
+  link: string;
+};
+
 export default function Dashboard() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
   const navigate = useNavigate();
 
   const fetchProjects = async () => {
@@ -31,7 +39,7 @@ export default function Dashboard() {
     fetchProjects();
   }, []);
 
-  const handleDeleteProject = async (id) => {
+  const handleDeleteProject = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
         const token = localStorage.getItem('adminToken');
@@ -57,7 +65,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleEditProject = (id) => {
+  const handleEditProject = (id: string) => {
     navigate(`/admin/edit-project/${id}`);
   };
 
@@ -107,4 +115,4 @@ export default function Dashboard() {
       </div>
     </main>
   );
-} 
+}

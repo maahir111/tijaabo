@@ -1,5 +1,3 @@
-// chart.tsx
-
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import { cn } from "@/lib/utils"
@@ -130,8 +128,8 @@ const ChartTooltipContent = React.forwardRef<
       if (hideLabel || !payload?.length) return null
 
       const [item] = payload
-      const key = `${labelKey || item.dataKey || item.name || "value"}`
-      const itemConfig = getPayloadConfigFromPayload(config, item, key)
+      const key = `${labelKey || item?.dataKey || item?.name || "value"}`
+      const itemConfig = item ? getPayloadConfigFromPayload(config, item, key) : undefined
       const value =
         !labelKey && typeof label === "string"
           ? config[label as keyof typeof config]?.label || label

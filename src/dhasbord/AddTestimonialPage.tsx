@@ -4,15 +4,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from './config';
 
 function AddTestimonialPage() {
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
 
-  const [fullName, setFullName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState(0);
-  const [image, setImage] = useState(null);
-  const [currentImageUrl, setCurrentImageUrl] = useState("");
+  const [fullName, setFullName] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
+  const [image, setImage] = useState<File | null>(null);
+  const [currentImageUrl, setCurrentImageUrl] = useState<string>("");
 
   useEffect(() => {
     if (id) {
@@ -35,7 +35,7 @@ function AddTestimonialPage() {
           } else {
             console.error("Failed to fetch testimonial:", data.message);
             alert("Failed to load testimonial for editing.");
-            navigate("/messages"); // Redirect if testimonial not found
+            navigate("/messages");
           }
         } catch (error) {
           console.error("Error fetching testimonial:", error);
@@ -47,18 +47,17 @@ function AddTestimonialPage() {
     }
   }, [id, navigate]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("fullName", fullName);
     formData.append("subject", subject);
     formData.append("text", text);
-    formData.append("rating", rating);
+    formData.append("rating", rating.toString());
     if (image) {
       formData.append("image", image);
     } else if (currentImageUrl && !image) {
-      // If no new image is selected but there was a previous image, retain it
       formData.append("image", currentImageUrl);
     }
 
@@ -81,7 +80,7 @@ function AddTestimonialPage() {
 
       if (response.ok) {
         alert(`Testimonial ${id ? "updated" : "added"} successfully!`);
-        navigate("/admin/messages"); // Redirect to messages page after success
+        navigate("/admin/messages");
       } else {
         alert(`Error: ${data.message || "Something went wrong"}`);
       }
@@ -91,10 +90,10 @@ function AddTestimonialPage() {
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
-      setCurrentImageUrl(""); // Clear previous image URL if new image is selected
+      setCurrentImageUrl("");
     }
   };
 
@@ -117,7 +116,7 @@ function AddTestimonialPage() {
             className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
             placeholder="Full Name"
             value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
             required
           />
         </div>
@@ -132,7 +131,7 @@ function AddTestimonialPage() {
             className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
             placeholder="Subject"
             value={subject}
-            onChange={(e) => setSubject(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
             required
           />
         </div>
@@ -146,7 +145,7 @@ function AddTestimonialPage() {
             className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 h-48 resize-y transition-all duration-300 shadow-sm"
             placeholder="Enter Text"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
             required
           ></textarea>
         </div>
@@ -183,7 +182,10 @@ function AddTestimonialPage() {
             />
             <button
               type="button"
-              onClick={() => document.getElementById("image").click()}
+              onClick={() => {
+                const input = document.getElementById("image") as HTMLInputElement | null;
+                if (input) input.click();
+              }}
               className="flex items-center justify-center px-6 py-3 bg-white border border-blue-300 rounded-lg text-blue-700 hover:bg-blue-100 focus:outline-none focus:ring-4 focus:ring-blue-200 transition-all duration-300 shadow-sm"
             >
               <FaPlus className="mr-2 text-blue-600" /> CHOOSE IMAGE

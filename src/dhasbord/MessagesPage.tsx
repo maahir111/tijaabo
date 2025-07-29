@@ -3,14 +3,24 @@ import { API_BASE_URL } from './config';
 import TestimonialCard from './TestimonialCard';
 import { Link, useNavigate } from "react-router-dom";
 
+type TestimonialType = {
+  _id: string;
+  fullName: string;
+  subject: string;
+  text: string;
+  rating: number;
+  image: string;
+};
+
 export default function MessagesPage() {
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState<TestimonialType[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchTestimonials();
+    // eslint-disable-next-line
   }, []);
 
   const fetchTestimonials = async () => {
@@ -35,32 +45,32 @@ export default function MessagesPage() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {
-    try {
+      try {
         const token = localStorage.getItem('adminToken');
         const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
-        method: "DELETE",
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+          method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
 
-      if (response.ok) {
+        if (response.ok) {
           setTestimonials(testimonials.filter(t => t._id !== id));
-        alert("Testimonial deleted successfully!");
-      } else {
+          alert("Testimonial deleted successfully!");
+        } else {
           const data = await response.json();
           setError(data.message || "Failed to delete testimonial");
-      }
-    } catch (error) {
+        }
+      } catch (error) {
         setError("Error deleting testimonial");
       }
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (id: string) => {
     navigate(`/admin/edit-testimonial/${id}`);
   };
 
@@ -95,4 +105,4 @@ export default function MessagesPage() {
       </div>
     </div>
   );
-} 
+}

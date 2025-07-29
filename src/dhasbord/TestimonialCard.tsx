@@ -1,8 +1,23 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-function TestimonialCard({ testimonial, onDelete, onEdit }) {
-  const { fullName, subject, text, rating, image } = testimonial;
+type Testimonial = {
+  _id: string;
+  fullName: string;
+  subject: string;
+  text: string;
+  rating: number;
+  image: string;
+};
+
+type Props = {
+  testimonial: Testimonial;
+  onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
+};
+
+function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
+  const { _id, fullName, subject, text, rating, image } = testimonial;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
@@ -23,13 +38,13 @@ function TestimonialCard({ testimonial, onDelete, onEdit }) {
         </div>
         <div className="flex justify-end space-x-2 mt-4">
           <button
-            onClick={() => onEdit(testimonial._id)}
+            onClick={() => onEdit(_id)}
             className="p-2 text-blue-600 hover:bg-blue-100 rounded-full"
           >
             <FaEdit />
           </button>
           <button
-            onClick={() => onDelete(testimonial._id)}
+            onClick={() => onDelete(_id)}
             className="p-2 text-red-600 hover:bg-red-100 rounded-full"
           >
             <FaTrash />
@@ -38,6 +53,6 @@ function TestimonialCard({ testimonial, onDelete, onEdit }) {
       </div>
     </div>
   );
-} 
+}
 
-export default TestimonialCard; 
+export default TestimonialCard;

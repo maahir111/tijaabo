@@ -3,46 +3,47 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, MAX_FILE_SIZE, ALLOWED_FILE_TYPES } from './config';
 
 function AddProjectPage() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
-  const [image, setImage] = useState(null);
-  const [currentImageUrl, setCurrentImageUrl] = useState("");
-  const [error, setError] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [link, setLink] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
+  const [currentImageUrl, setCurrentImageUrl] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>();
 
   useEffect(() => {
     if (id) {
       fetchProject();
     }
+    // eslint-disable-next-line
   }, [id]);
 
-      const fetchProject = async () => {
-        try {
-          const token = localStorage.getItem('adminToken');
-          const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
-          });
-          const data = await response.json();
-          if (response.ok) {
-            setTitle(data.title);
-            setDescription(data.description);
-            setLink(data.link);
-            setCurrentImageUrl(data.image);
-          } else {
+  const fetchProject = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setTitle(data.title);
+        setDescription(data.description);
+        setLink(data.link);
+        setCurrentImageUrl(data.image);
+      } else {
         setError(data.message || "Failed to fetch project");
-          }
-        } catch (error) {
+      }
+    } catch (error) {
       setError("Error fetching project details");
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
         setError("File size should be less than 5MB");
@@ -58,7 +59,7 @@ function AddProjectPage() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -110,7 +111,7 @@ function AddProjectPage() {
           <input
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />
@@ -119,10 +120,10 @@ function AddProjectPage() {
           <label className="block mb-2">Description:</label>
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
             required
             className="w-full p-2 border rounded"
-            rows="4"
+            rows={4}
           />
         </div>
         <div>
@@ -130,17 +131,17 @@ function AddProjectPage() {
           <input
             type="url"
             value={link}
-            onChange={(e) => setLink(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />
         </div>
         <div>
           <label className="block mb-2">Image:</label>
-            <input
-              type="file"
-              onChange={handleImageChange}
-              accept="image/*"
+          <input
+            type="file"
+            onChange={handleImageChange}
+            accept="image/*"
             className="w-full p-2 border rounded"
           />
           {currentImageUrl && (
@@ -149,7 +150,7 @@ function AddProjectPage() {
               alt="Current"
               className="mt-2 max-w-xs"
             />
-            )}
+          )}
         </div>
         <button
           type="submit"
@@ -160,6 +161,6 @@ function AddProjectPage() {
       </form>
     </div>
   );
-} 
+}
 
-export default AddProjectPage; 
+export default AddProjectPage;
