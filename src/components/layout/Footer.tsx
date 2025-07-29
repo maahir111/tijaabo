@@ -55,7 +55,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-[#325fff]">
               Quick Links
             </h3>
-            <ul className="space-y-4">
+            <ul className="flex flex-col gap-2">
                 <NavLink to="/"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
                   <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
                   Home

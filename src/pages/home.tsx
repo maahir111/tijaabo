@@ -281,7 +281,7 @@ useEffect(() => {
                   />
 
                   {/* Floating elements */}
-                  <motion.div
+                  {/* <motion.div
                     className="animate-float"
                     animate={{ y: [0, -20, 0] }}
                     transition={{
@@ -294,10 +294,10 @@ useEffect(() => {
                     <div className="absolute top-14 right-10 w-12 h-12 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
                     <div className="absolute bottom-16 left-16 w-20 h-20 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
                     <div className="absolute bottom-10 right-12 w-24 h-16 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
-                  </motion.div>
+                  </motion.div> */}
 
                   {/* Code visualization */}
-                  <div className="relative z-10 mt-4">
+                  {/* <div className="relative z-10 mt-4">
                     <motion.div
                       className="inline-block text-4xl mb-4"
                       animate={{
@@ -318,7 +318,7 @@ useEffect(() => {
                       }}
                     >
                       <i className="fas fa-code text-[#4c75ff]"></i>
-                    </motion.div>
+                    </motion.div> */}
 
                     {/* Code editor style container */}
                     <div className="bg-[#1E93B]/50 rounded-xl p-4 backdrop-blur-sm border border-[#39509A]/20">
@@ -330,7 +330,7 @@ useEffect(() => {
                       </div>
 
                       {/* Code content */}
-                      <div className="font-mono text-sm space-y-2">
+                      {/* <div className="font-mono text-sm space-y-2">
                         <motion.div
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
@@ -379,7 +379,47 @@ useEffect(() => {
                           <span className="text-green-500">result</span>
                           <span className="text-[#39509A]/80">);</span>
                         </motion.div>
-                      </div>
+                      </div> */}
+                      <div className="bg-gray-900 text-green-400 font-mono p-6 rounded-lg shadow-xl border border-green-500 w-full max-w-xl mx-auto">
+  <div className="mb-2 text-sm text-gray-400">corevana@digital ~ $</div>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5 }}
+    className="whitespace-pre-wrap"
+  >
+    $ initializing your digital vision...
+  </motion.p>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1 }}
+    className="whitespace-pre-wrap"
+  >
+    $ connecting to innovation engine...
+  </motion.p>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.5 }}
+    className="whitespace-pre-wrap"
+  >
+    $ deploying smart technology ⚙️
+  </motion.p>
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 2 }}
+    className="text-blue-400 font-bold mt-4"
+  >
+    ✔ Success: Corevana is now powering your business 🚀
+  </motion.p>
+</div>
+
                     </div>
 
                     {/* Tagline */}
@@ -394,7 +434,7 @@ useEffect(() => {
                       </div>
                     </motion.div>
                   </div>
-                </div>
+                {/* </div> */}
               </motion.div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#39509A] to-[#39509A]/80 rounded-2xl -z-10 opacity-50 blur-2xl"></div>
             </motion.div>
