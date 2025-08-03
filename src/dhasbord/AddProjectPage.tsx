@@ -22,7 +22,7 @@ function AddProjectPage() {
   const fetchProject = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/projects/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ function AddProjectPage() {
     }
 
     const method = id ? "PUT" : "POST";
-    const url = id ? `${API_BASE_URL}/projects/${id}` : `${API_BASE_URL}/projects`;
+    const url = id ? `${API_BASE_URL}/api/projects/${id}` : `${API_BASE_URL}/api/projects`;
 
     try {
       const token = localStorage.getItem('adminToken');
