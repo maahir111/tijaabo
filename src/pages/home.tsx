@@ -7,7 +7,7 @@ import { Eye } from "lucide-react";
 import { Target } from "lucide-react";
 import {pageTransition, staggerContainer, childVariant, heroPatternCSS,} from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from '../dhasbord/config';
 
 
 const variants = {
