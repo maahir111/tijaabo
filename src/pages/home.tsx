@@ -7,6 +7,8 @@ import { Eye } from "lucide-react";
 import { Target } from "lucide-react";
 import {pageTransition, staggerContainer, childVariant, heroPatternCSS,} from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { API_BASE_URL } from './config';
+
 
 const variants = {
   initial: { x: 300, opacity: 0, },
@@ -103,7 +105,7 @@ const canSlide = total > testimonialsPerPage;
 const [current, setCurrent] = useState(0);
 
 useEffect(() => {
-  fetch("https://back123-in3w.onrender.com/api/testimonials")
+  fetch(`${API_BASE_URL}/api/testimonials`)
     .then((res) => res.json())
     .then((data) => setTestimonials(data))
     .catch((err) => console.error("Error fetching testimonials:", err));
@@ -1216,7 +1218,7 @@ useEffect(() => {
                   <div key={testimonial._id || index} className="bg-white dark:bg-[#1E293B]/50 rounded-2xl p-6 shadow-lg border border-slate-200/50 dark:border-slate-800/50">
                     <div className="flex items-center mb-4">
                       <img
-                        src={testimonial.image?.startsWith('http') ? testimonial.image : `https://back123-in3w.onrender.com${testimonial.image}`}
+                        src={testimonial.image?.startsWith('http') ? testimonial.image : `${API_BASE_URL}${testimonial.image}`}
                         alt={testimonial.fullName}
                         className="w-12 h-12 rounded-full object-cover mr-4"
                       />

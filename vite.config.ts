@@ -14,7 +14,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://back123-in3w.onrender.com',
+        target: '${API_BASE_URL}',
         changeOrigin: true
       }
     }

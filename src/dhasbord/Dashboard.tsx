@@ -91,7 +91,7 @@ export default function Dashboard() {
             key={project._id}
             className="bg-white rounded-xl shadow-md overflow-hidden relative"
           >
-            <img src={`https://back123-in3w.onrender.com${project.image}`} alt={project.title} className="w-full h-40 object-cover" />
+            <img src={`${API_BASE_URL}${project.image}`} alt={project.title} className="w-full h-40 object-cover" />
             <div className="p-4">
               <h3 className="font-bold">{project.title}</h3>
               <p className="text-sm text-blue-600 mt-2 line-clamp-3">

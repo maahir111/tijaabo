@@ -9,6 +9,8 @@ import { motion } from "framer-motion";
 // import { useLocation } from "wouter"; // Not used
 // import { ToastContainer, toast } from 'react-toastify'; // Not used
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from '../dhasbord/config';
+
 
 // Define the Project type
 type Project = {
@@ -30,7 +32,7 @@ function PortfolioPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("https://back123-in3w.onrender.com/api/projects")
+    fetch(`${API_BASE_URL}/api/projects`)
       .then((res) => res.json())
       .then((data) => {
         setProjects(data);
@@ -79,7 +81,7 @@ function PortfolioPage() {
               className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
               <img
-                src={project.image?.startsWith('http') ? project.image : `https://back123-in3w.onrender.com${project.image}`}
+                src={project.image?.startsWith('http') ? project.image : `${API_BASE_URL}${project.image}`}
                 alt={project.title}
                 className="w-full h-48 object-cover"
               />

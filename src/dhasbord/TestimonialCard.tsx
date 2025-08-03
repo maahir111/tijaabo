@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { API_BASE_URL } from './config';
+
 
 type Testimonial = {
   _id: string;
@@ -23,7 +25,7 @@ function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
     <div className="bg-white rounded-lg shadow-md p-4">
       {image && (
         <img
-          src={image?.startsWith('http') ? image : `https://back123-in3w.onrender.com${image}`}
+          src={image?.startsWith('http') ? image : `${API_BASE_URL}${image}`}
           alt={fullName}
           className="w-full h-48 object-cover rounded-lg mb-4"
         />
