@@ -19,7 +19,7 @@ function AddTestimonialPage() {
       const fetchTestimonial = async () => {
         try {
           const token = localStorage.getItem('adminToken');
-          const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
+          const response = await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
@@ -63,8 +63,8 @@ function AddTestimonialPage() {
 
     const method = id ? "PUT" : "POST";
     const url = id
-      ? `${API_BASE_URL}/testimonials/${id}`
-      : `${API_BASE_URL}/testimonials`;
+      ? `${API_BASE_URL}/api/testimonials/${id}`
+      : `${API_BASE_URL}/api/testimonials`;
 
     try {
       const token = localStorage.getItem('adminToken');

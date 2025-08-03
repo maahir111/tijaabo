@@ -18,7 +18,7 @@ export default function Dashboard() {
   const fetchProjects = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/projects`, {
+      const response = await fetch(`${API_BASE_URL}/api/projects`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ export default function Dashboard() {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/projects/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${token}`,

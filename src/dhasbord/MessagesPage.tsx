@@ -26,7 +26,7 @@ export default function MessagesPage() {
   const fetchTestimonials = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/testimonials`, {
+      const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export default function MessagesPage() {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch(`${API_BASE_URL}/testimonials/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
           method: "DELETE",
           headers: {
             'Authorization': `Bearer ${token}`,
