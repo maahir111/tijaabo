@@ -18,20 +18,29 @@ export default function Dashboard() {
   const fetchProjects = async () => {
     try {
       const token = localStorage.getItem('adminToken');
+      if (!token) {
+        alert("No token found. Please login again.");
+        navigate('/admin/login');
+        return;
+      }
+
       const response = await fetch(`${API_BASE_URL}/api/projects`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
+
       const data = await response.json();
       if (response.ok) {
         setProjects(data);
       } else {
         console.error("Failed to fetch projects:", data.message);
+        alert(data.message || "Failed to fetch projects.");
       }
     } catch (error) {
       console.error("Error fetching projects:", error);
+      alert("An error occurred while loading projects.");
     }
   };
 
@@ -43,6 +52,12 @@ export default function Dashboard() {
     if (window.confirm("Are you sure you want to delete this project?")) {
       try {
         const token = localStorage.getItem('adminToken');
+        if (!token) {
+          alert("No token found. Please login again.");
+          navigate('/admin/login');
+          return;
+        }
+
         const response = await fetch(`${API_BASE_URL}/api/projects/${id}`, {
           method: "DELETE",
           headers: {
@@ -53,7 +68,7 @@ export default function Dashboard() {
 
         if (response.ok) {
           alert("Project deleted successfully!");
-          fetchProjects(); // Refresh the list
+          fetchProjects();
         } else {
           const data = await response.json();
           alert(`Error: ${data.message || "Something went wrong"}`);
@@ -79,40 +94,59 @@ export default function Dashboard() {
             type="text"
             placeholder="Search here..."
             className="w-full px-4 py-2 pl-10 rounded-full border border-blue-300 focus:outline-none"
+            disabled
           />
           <FaSearch className="absolute top-2.5 left-3 text-blue-400" />
         </div>
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {projects.map((project) => (
-          <div
-            key={project._id}
-            className="bg-white rounded-xl shadow-md overflow-hidden relative"
-          >
-            <img src={`${API_BASE_URL}${project.image}`} alt={project.title} className="w-full h-40 object-cover" />
-            <div className="p-4">
-              <h3 className="font-bold">{project.title}</h3>
-              <p className="text-sm text-blue-600 mt-2 line-clamp-3">
-                {project.description}
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <button onClick={() => window.open(project.link, '_blank')} className="text-xs border px-2 py-1 rounded hover:bg-blue-100">
-                  Learn More
-                </button>
-                {/* <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                  {project.status}
-                </span> */}
+      {projects.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {projects.map((project) => (
+            <div
+              key={project._id}
+              className="bg-white rounded-xl shadow-md overflow-hidden relative"
+            >
+              <img
+                src={
+                  project.image.startsWith('/uploads')
+                    ? `${API_BASE_URL}${project.image}`
+                    : project.image
+                }
+                alt={project.title}
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="font-bold">{project.title}</h3>
+                <p className="text-sm text-blue-600 mt-2 line-clamp-3">
+                  {project.description}
+                </p>
+                <div className="flex justify-between items-center mt-4">
+                  <button
+                    onClick={() => window.open(project.link, '_blank')}
+                    className="text-xs border px-2 py-1 rounded hover:bg-blue-100"
+                  >
+                    Learn More
+                  </button>
+                </div>
+              </div>
+              <div className="absolute top-2 right-2 bg-white p-1 rounded-full shadow flex space-x-2">
+                <FaEdit
+                  className="w-4 h-4 text-blue-600 cursor-pointer"
+                  onClick={() => handleEditProject(project._id)}
+                />
+                <FaTrash
+                  className="w-4 h-4 text-red-600 cursor-pointer"
+                  onClick={() => handleDeleteProject(project._id)}
+                />
               </div>
             </div>
-            <div className="absolute top-2 right-2 bg-white p-1 rounded-full shadow flex space-x-2">
-              <FaEdit className="w-4 h-4 text-blue-600 cursor-pointer" onClick={() => handleEditProject(project._id)} />
-              <FaTrash className="w-4 h-4 text-red-600 cursor-pointer" onClick={() => handleDeleteProject(project._id)} />
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500 mt-10">No projects found.</p>
+      )}
     </main>
   );
 }

@@ -12,40 +12,40 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50">
-      {/* Sidebar - Fixed */}
-      <aside className="fixed top-0 left-0 h-screen w-64 bg-gradient-to-b from-blue-700 to-blue-900 text-white p-6 shadow-lg z-10">
+    <div className="min-h-screen bg-blue-50 flex">
+      {/* Sidebar */}
+      <aside className="w-64 h-screen bg-gradient-to-b from-blue-700 to-blue-900 text-white p-6 shadow-lg fixed top-0 left-0 z-10">
         <h2 className="text-2xl font-bold mb-8">Dashboard</h2>
-        <nav className="space-y-4">
+        <nav className="flex flex-col space-y-4">
           <Link
             to="/admin/dashboard"
-            className="flex items-center gap-3 text-white hover:text-blue-300"
+            className="flex items-center gap-3 hover:text-blue-300 transition-colors"
           >
             <FaTachometerAlt /> Dashboard
           </Link>
           <Link
             to="/admin/add-project"
-            className="flex items-center gap-3 text-white hover:text-blue-300"
+            className="flex items-center gap-3 hover:text-blue-300 transition-colors"
           >
             <FaPlus /> Add Project
           </Link>
           <Link
             to="/admin/messages"
-            className="flex items-center gap-3 text-white hover:text-blue-300"
+            className="flex items-center gap-3 hover:text-blue-300 transition-colors"
           >
             <FaEnvelope /> Testimonials
           </Link>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 text-white hover:text-blue-300 w-full text-left"
+            className="flex items-center gap-3 hover:text-blue-300 transition-colors text-left focus:outline-none"
           >
             <FaSignOutAlt /> Sign Out
           </button>
         </nav>
       </aside>
 
-      {/* Main Content with left margin */}
-      <main className="ml-64 p-6">
+      {/* Main Content */}
+      <main className="flex-1 ml-64 p-6">
         <Outlet />
       </main>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaPlus, FaStar } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from './config';
@@ -6,48 +6,43 @@ import { API_BASE_URL } from './config';
 function AddTestimonialPage() {
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [fullName, setFullName] = useState<string>("");
-  const [subject, setSubject] = useState<string>("");
-  const [text, setText] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+  const [fullName, setFullName] = useState("");
+  const [subject, setSubject] = useState("");
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState(0);
   const [image, setImage] = useState<File | null>(null);
-  const [currentImageUrl, setCurrentImageUrl] = useState<string>("");
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
 
   useEffect(() => {
-    if (id) {
-      const fetchTestimonial = async () => {
-        try {
-          const token = localStorage.getItem('adminToken');
-          const response = await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json'
-            }
-          });
-          const data = await response.json();
-          if (response.ok) {
-            setFullName(data.fullName);
-            setSubject(data.subject);
-            setText(data.text);
-            setRating(data.rating);
-            setCurrentImageUrl(data.image);
-          } else {
-            console.error("Failed to fetch testimonial:", data.message);
-            alert("Failed to load testimonial for editing.");
-            navigate("/messages");
-          }
-        } catch (error) {
-          console.error("Error fetching testimonial:", error);
-          alert("Error loading testimonial for editing.");
-          navigate("/messages");
-        }
-      };
-      fetchTestimonial();
-    }
-  }, [id, navigate]);
+    if (id) fetchTestimonial();
+  }, [id]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const fetchTestimonial = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/testimonials/${id}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setFullName(data.fullName);
+        setSubject(data.subject);
+        setText(data.text);
+        setRating(data.rating);
+        setCurrentImageUrl(data.image);
+      } else {
+        console.error("Failed to fetch:", data.message);
+        alert("Failed to load testimonial.");
+        navigate("/messages");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error loading testimonial.");
+      navigate("/messages");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -55,6 +50,7 @@ function AddTestimonialPage() {
     formData.append("subject", subject);
     formData.append("text", text);
     formData.append("rating", rating.toString());
+
     if (image) {
       formData.append("image", image);
     } else if (currentImageUrl && !image) {
@@ -67,15 +63,7 @@ function AddTestimonialPage() {
       : `${API_BASE_URL}/api/testimonials`;
 
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData,
-      });
-
+      const response = await fetch(url, { method, body: formData });
       const data = await response.json();
 
       if (response.ok) {
@@ -85,8 +73,8 @@ function AddTestimonialPage() {
         alert(`Error: ${data.message || "Something went wrong"}`);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(`Failed to ${id ? "update" : "add"} testimonial. Please try again.`);
+      console.error("Submit error:", error);
+      alert(`Failed to ${id ? "update" : "add"} testimonial.`);
     }
   };
 
@@ -102,10 +90,12 @@ function AddTestimonialPage() {
       <h1 className="text-4xl font-extrabold mb-10 text-blue-900 text-center">
         {id ? "Edit Testimonial" : "Add New Testimonial"}
       </h1>
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-none space-y-8 border border-blue-200 mx-auto"
+        className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-3xl space-y-8 border border-blue-200 mx-auto"
       >
+        {/* Full Name */}
         <div>
           <label htmlFor="fullName" className="block text-blue-800 text-lg font-semibold mb-3">
             Full Name
@@ -113,14 +103,14 @@ function AddTestimonialPage() {
           <input
             type="text"
             id="fullName"
-            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
-            placeholder="Full Name"
             value={fullName}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
             required
+            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:ring-4 focus:ring-blue-200 transition-all"
           />
         </div>
 
+        {/* Subject */}
         <div>
           <label htmlFor="subject" className="block text-blue-800 text-lg font-semibold mb-3">
             Subject
@@ -128,46 +118,48 @@ function AddTestimonialPage() {
           <input
             type="text"
             id="subject"
-            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
-            placeholder="Subject"
             value={subject}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSubject(e.target.value)}
+            onChange={(e) => setSubject(e.target.value)}
             required
+            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:ring-4 focus:ring-blue-200 transition-all"
           />
         </div>
 
+        {/* Text */}
         <div>
           <label htmlFor="text" className="block text-blue-800 text-lg font-semibold mb-3">
-            Enter Text
+            Message
           </label>
           <textarea
             id="text"
-            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 h-48 resize-y transition-all duration-300 shadow-sm"
-            placeholder="Enter Text"
+            rows={5}
             value={text}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
             required
-          ></textarea>
+            className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:ring-4 focus:ring-blue-200 transition-all resize-y"
+          />
         </div>
 
+        {/* Rating */}
         <div>
           <label className="block text-blue-800 text-lg font-semibold mb-3">
             Rating
           </label>
           <div className="flex items-center space-x-1">
             {[...Array(5)].map((_, i) => {
-              const ratingValue = i + 1;
+              const value = i + 1;
               return (
                 <FaStar
                   key={i}
-                  className={`w-8 h-8 cursor-pointer ${ratingValue <= rating ? "text-blue-600" : "text-blue-300"}`}
-                  onClick={() => setRating(ratingValue)}
+                  className={`w-8 h-8 cursor-pointer ${value <= rating ? "text-blue-600" : "text-blue-300"}`}
+                  onClick={() => setRating(value)}
                 />
               );
             })}
           </div>
         </div>
 
+        {/* Image Upload */}
         <div>
           <label htmlFor="image" className="block text-blue-800 text-lg font-semibold mb-3">
             Choose Image
@@ -175,31 +167,30 @@ function AddTestimonialPage() {
           <div className="flex items-center space-x-5">
             <input
               type="file"
+              ref={fileInputRef}
               id="image"
-              className="hidden"
               onChange={handleImageChange}
               accept="image/*"
+              className="hidden"
             />
             <button
               type="button"
-              onClick={() => {
-                const input = document.getElementById("image") as HTMLInputElement | null;
-                if (input) input.click();
-              }}
-              className="flex items-center justify-center px-6 py-3 bg-white border border-blue-300 rounded-lg text-blue-700 hover:bg-blue-100 focus:outline-none focus:ring-4 focus:ring-blue-200 transition-all duration-300 shadow-sm"
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center px-6 py-3 border border-blue-300 rounded-lg text-blue-700 hover:bg-blue-100 shadow-sm"
             >
               <FaPlus className="mr-2 text-blue-600" /> CHOOSE IMAGE
             </button>
-            {image && <span className="text-blue-700 font-medium text-base">{image.name}</span>}
-            {currentImageUrl && !image && (
-              <span className="text-blue-700 font-medium text-base">{currentImageUrl.split('/').pop()} (Current)</span>
+            {image && <span className="text-blue-700">{image.name}</span>}
+            {!image && currentImageUrl && (
+              <span className="text-blue-700">{currentImageUrl.split("/").pop()} (Current)</span>
             )}
           </div>
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 font-bold text-lg"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all font-bold text-lg"
         >
           {id ? "UPDATE MESSAGE" : "ADD MESSAGE"}
         </button>

@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL, MAX_FILE_SIZE, ALLOWED_FILE_TYPES } from './config';
 
 function AddProjectPage() {
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [link, setLink] = useState<string>("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [currentImageUrl, setCurrentImageUrl] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [currentImageUrl, setCurrentImageUrl] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
 
@@ -16,7 +16,6 @@ function AddProjectPage() {
     if (id) {
       fetchProject();
     }
-    // eslint-disable-next-line
   }, [id]);
 
   const fetchProject = async () => {
@@ -24,8 +23,8 @@ function AddProjectPage() {
       const token = localStorage.getItem('adminToken');
       const response = await fetch(`${API_BASE_URL}/api/projects/${id}`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -73,17 +72,17 @@ function AddProjectPage() {
       formData.append("image", currentImageUrl);
     }
 
+    const token = localStorage.getItem('adminToken');
     const method = id ? "PUT" : "POST";
     const url = id ? `${API_BASE_URL}/api/projects/${id}` : `${API_BASE_URL}/api/projects`;
 
     try {
-      const token = localStorage.getItem('adminToken');
       const response = await fetch(url, {
         method,
+        body: formData,
         headers: {
           'Authorization': `Bearer ${token}`
-        },
-        body: formData,
+        }
       });
 
       const data = await response.json();
@@ -111,7 +110,7 @@ function AddProjectPage() {
           <input
             type="text"
             value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />
@@ -120,7 +119,7 @@ function AddProjectPage() {
           <label className="block mb-2">Description:</label>
           <textarea
             value={description}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
             required
             className="w-full p-2 border rounded"
             rows={4}
@@ -131,7 +130,7 @@ function AddProjectPage() {
           <input
             type="url"
             value={link}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value)}
+            onChange={(e) => setLink(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />

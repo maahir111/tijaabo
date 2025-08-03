@@ -25,11 +25,10 @@ export default function MessagesPage() {
 
   const fetchTestimonials = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
       const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
         }
       });
       const data = await response.json();
@@ -39,6 +38,7 @@ export default function MessagesPage() {
         setError(data.message || "Failed to fetch testimonials");
       }
     } catch (error) {
+      console.error(error);
       setError("Error fetching testimonials");
     } finally {
       setLoading(false);
@@ -48,12 +48,11 @@ export default function MessagesPage() {
   const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {
       try {
-        const token = localStorage.getItem('adminToken');
         const response = await fetch(`${API_BASE_URL}/api/testimonials/${id}`, {
           method: "DELETE",
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
           }
         });
 
@@ -65,6 +64,7 @@ export default function MessagesPage() {
           setError(data.message || "Failed to delete testimonial");
         }
       } catch (error) {
+        console.error(error);
         setError("Error deleting testimonial");
       }
     }

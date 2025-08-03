@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from './config'; // Ensure this exists and exports the correct base URL
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -20,10 +20,10 @@ function LoginPage() {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.token) {
         localStorage.setItem("adminToken", data.token);
         alert("Login successful!");
-        navigate("/admin/dashboard"); // Redirect to dashboard or home page
+        navigate("/admin/dashboard");
       } else {
         alert(`Login failed: ${data.message || "Invalid credentials"}`);
       }
@@ -45,11 +45,11 @@ function LoginPage() {
             <input
               type="text"
               id="username"
-              className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
-              placeholder="Enter your username"
               value={username}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
               required
+              className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
+              placeholder="Enter your username"
             />
           </div>
           <div>
@@ -59,11 +59,11 @@ function LoginPage() {
             <input
               type="password"
               id="password"
-              className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
-              placeholder="Enter your password"
               value={password}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               required
+              className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
+              placeholder="Enter your password"
             />
           </div>
           <button
