@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from './config'; // Ensure this exists and exports the correct base URL
+import { API_BASE_URL } from './config';
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // 🆕 Loading state
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Show spinner
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
@@ -19,7 +22,6 @@ function LoginPage() {
       });
 
       const data = await response.json();
-
       if (response.ok && data.token) {
         localStorage.setItem("adminToken", data.token);
         alert("Login successful!");
@@ -30,6 +32,8 @@ function LoginPage() {
     } catch (error) {
       console.error("Error during login:", error);
       alert("Error during login. Please try again.");
+    } finally {
+      setLoading(false); // Hide spinner
     }
   };
 
@@ -46,7 +50,7 @@ function LoginPage() {
               type="text"
               id="username"
               value={username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               required
               className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
               placeholder="Enter your username"
@@ -60,7 +64,7 @@ function LoginPage() {
               type="password"
               id="password"
               value={password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full px-5 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all duration-300 shadow-sm"
               placeholder="Enter your password"
@@ -68,9 +72,40 @@ function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2 font-bold text-lg"
+            disabled={loading}
+            className={`w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-offset-2
+              ${loading
+                ? "bg-blue-400 cursor-not-allowed text-white"
+                : "bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white"
+              }`}
           >
-            Login
+            {loading ? (
+              <div className="flex items-center justify-center space-x-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                <span>Logging in...</span>
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
       </div>
