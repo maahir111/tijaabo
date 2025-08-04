@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Footer = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email || !email.includes("@")) {
