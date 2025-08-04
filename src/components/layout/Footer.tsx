@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    toast.success("Thank you! You have successfully subscribed.");
+    setEmail("");
+  };
+
   return (
     <footer className="bg-[#F4F7FC] dark:bg-[#1E293B] relative overflow-hidden">
       {/* Background decorative elements */}
@@ -23,7 +38,11 @@ const Footer = () => {
             className="space-y-6"
           >
             <div className="flex items-center">
-              <img className="w-[180px]" src="https://i.postimg.cc/tTq8cd1p/Screenshot-2025-07-20-105044-removebg-preview.png" alt="" />
+              <img
+                className="w-[180px]"
+                src="https://i.postimg.cc/tTq8cd1p/Screenshot-2025-07-20-105044-removebg-preview.png"
+                alt=""
+              />
             </div>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
               Building innovative software solutions that transform businesses
@@ -56,26 +75,20 @@ const Footer = () => {
               Quick Links
             </h3>
             <ul className="flex flex-col gap-2">
-                <NavLink to="/"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
-                  <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
-                  Home
-                </li></NavLink>
-                <NavLink to="/about"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
-                  <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
-                  About
-                </li></NavLink>
-                <NavLink to="/services"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
-                  <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
-                  Services
-                </li></NavLink>
-                <NavLink to="/portfolio"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
-                  <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
-                  Portfolio
-                </li></NavLink>
-                <NavLink to="/contact"><li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
-                  <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
-                  Contact
-                </li></NavLink>
+              {[
+                { label: "Home", to: "/" },
+                { label: "About", to: "/about" },
+                { label: "Services", to: "/services" },
+                { label: "Portfolio", to: "/portfolio" },
+                { label: "Contact", to: "/contact" },
+              ].map(({ label, to }) => (
+                <NavLink key={label} to={to}>
+                  <li className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center">
+                    <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
+                    {label}
+                  </li>
+                </NavLink>
+              ))}
             </ul>
           </motion.div>
 
@@ -96,22 +109,15 @@ const Footer = () => {
                 "Graphic Design",
                 "CMS Design",
                 "Web Development",
-                // "Mobile Apps",
               ].map((service) => (
-                <motion.li
-                  key={service}
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Link
-                    href={`/services#${service
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`}
+                <motion.li key={service} whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                  <NavLink
+                    to="/services"
                     className="text-slate-600 dark:text-slate-400 hover:text-[#325fff] transition-colors duration-300 flex items-center"
                   >
                     <i className="fas fa-chevron-right text-xs mr-2 text-[#325fff]"></i>
                     {service}
-                  </Link>
+                  </NavLink>
                 </motion.li>
               ))}
             </ul>
@@ -174,13 +180,18 @@ const Footer = () => {
             <p className="text-slate-600 dark:text-slate-400 mb-6">
               Stay updated with our latest news, insights, and industry trends.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 rounded-xl border border-slate-200/50 dark:border-slate-800/50 bg-white dark:bg-[#1E293B]/50 focus:outline-none focus:ring-2 focus:ring-[#325fff] focus:border-transparent transition-all duration-300"
+                required
               />
               <motion.button
+                type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-6 py-3 rounded-xl bg-[#325fff] text-white font-medium hover:bg-[#325fff]/90 transition-colors duration-300"
@@ -188,6 +199,7 @@ const Footer = () => {
                 Subscribe
               </motion.button>
             </form>
+            <Toaster />
           </div>
         </motion.div>
 

@@ -8,6 +8,7 @@ import { Target } from "lucide-react";
 import {pageTransition, staggerContainer, childVariant, heroPatternCSS,} from "@/lib/utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { API_BASE_URL } from '../dhasbord/config';
+import { NavLink } from "react-router-dom";
 
 
 const variants = {
@@ -152,7 +153,7 @@ useEffect(() => {
 
 
 
-  return (
+return (
     <motion.div
       initial="hidden"
       animate="visible"
@@ -160,439 +161,338 @@ useEffect(() => {
       variants={pageTransition}
     >
       {/* Hero Section */}
-      <section
-        id="home"
-        className="relative pt-24 pb-16 md:py-28 bg-[#F4F7FC] dark:bg-[#1E293B] overflow-hidden"
-      >
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-[#39509A]/5 animate-pulse"></div>
-          <div className="absolute top-1/2 -left-12 w-40 h-40 rounded-full bg-[#39509A]/5 animate-pulse delay-1000"></div>
-          <div className="absolute -bottom-20 right-1/4 w-56 h-56 rounded-full bg-[#39509A]/5 animate-pulse delay-2000"></div>
+    <section
+      id="home"
+      className="relative pt-24 pb-16 md:py-28 bg-[#F4F7FC] dark:bg-[#1E293B] overflow-hidden">
+
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-[#39509A]/5 animate-pulse"></div>
+        <div className="absolute top-1/2 -left-12 w-40 h-40 rounded-full bg-[#39509A]/5 animate-pulse delay-1000"></div>
+        <div className="absolute -bottom-20 right-1/4 w-56 h-56 rounded-full bg-[#39509A]/5 animate-pulse delay-2000"></div>
 
           {/* Grid pattern */}
-          <div
-            className="absolute inset-0 opacity-50"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, #39509A10 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
-            }}
-          ></div>
-        </div>
+          <div className="absolute inset-0 opacity-50"
+            style={{ backgroundImage: `radial-gradient(circle at 1px 1px, #39509A10 1px, transparent 0)`, backgroundSize: "40px 40px",}}>
+          </div>
+      </div>
 
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="flex flex-col md:flex-row items-center"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           <motion.div
-            className="flex flex-col md:flex-row items-center"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
+            className="md:w-1/2 md:pr-8 mb-10 md:mb-0"
+            variants={childVariant}
           >
-            <motion.div
-              className="md:w-1/2 md:pr-8 mb-10 md:mb-0"
-              variants={childVariant}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-6"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#194aff] mr-2 animate-pulse"></span>
-                Welcome to corevana Tech
-              </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#194aff] mr-2 animate-pulse"></span>
+            Welcome to corevana Tech
+          </motion.div>
 
-              <motion.h1
-                className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
-                variants={childVariant}
-              >
-                Elevate your business with{" "}
-                <span className="relative">
-                  <span className="relative z-10 bg-gradient-to-r from-[#325fff] to-[#4c75ff]/80 bg-clip-text text-transparent">
-                    Digital Solutions
-                  </span>
-                  <motion.span
-                    className="absolute bottom-0 left-0 w-full h-2 bg-[#39509A]/20 rounded-full -z-10"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                  />
-                </span>{" "}
+          <motion.h1
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+            variants={childVariant}
+          >
+            Elevate your business with{" "}
+            <span className="relative">
+              <span className="relative z-10 bg-gradient-to-r from-[#325fff] to-[#4c75ff]/80 bg-clip-text text-transparent">
+                Digital Solutions
+              </span>
+              <motion.span
+                className="absolute bottom-0 left-0 w-full h-2 bg-[#39509A]/20 rounded-full -z-10"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              />
+              </span>{" "}
                 and smart technology
-              </motion.h1>
+          </motion.h1>
 
-              <motion.p
-                className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-xl"
-                variants={childVariant}
-              >
-                Empowering your business growth through creative, high-quality digital solutions that drive impact and lasting success.
-              </motion.p>
-
-              <motion.div
-                className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
-                variants={childVariant}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link
-                    href="/contact"
-                    className="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-[#325fff] hover:bg-[#4c75ff]/90 shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    Get Started
-                    <i className="fas fa-arrow-right ml-2"></i>
-                  </Link>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Link
-                    href="/services"
-                    className="inline-flex justify-center items-center px-6 py-3 border-2 border-[#4c75ff] text-base font-medium rounded-xl text-[#4c75ff] hover:bg-[#39509A]/10 shadow-lg hover:shadow-xl transition-all duration-300">
-                    Our Services
-                  </Link>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-            <motion.div className="md:w-1/2 relative" variants={childVariant}>
-              <motion.div
-                className="relative"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                <div className="w-full h-72 sm:h-80 bg-gradient-to-br rom-[#4c75ff]/20 to-[#4c75ff]/10 dark:from-[#4c75ff]/10 dark:to-[#4c75ff]/5 rounded-2xl overflow-hidden p-5 backdrop-blur-sm border border-[#39509A]/10 dark:border-[#39509A]/20 shadow-xl">
-                  {/* Animated background elements */}
-                  <motion.div
-                    className="absolute inset-0"
-                    animate={{
-                      background: [
-                        "radial-gradient(circle at 0% 0%, #39509A10 0%, transparent 50%)",
-                        "radial-gradient(circle at 100% 100%, #39509A10 0%, transparent 50%)",
-                        "radial-gradient(circle at 0% 0%, #39509A10 0%, transparent 50%)",
-                      ],
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-
-                  {/* Floating elements */}
-                  {/* <motion.div
-                    className="animate-float"
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <div className="absolute top-8 left-8 w-16 h-16 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
-                    <div className="absolute top-14 right-10 w-12 h-12 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
-                    <div className="absolute bottom-16 left-16 w-20 h-20 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
-                    <div className="absolute bottom-10 right-12 w-24 h-16 rounded-xl bg-[#4c75ff]/20 backdrop-blur-md border border-[#4c75ff]/30 shadow-lg"></div>
-                  </motion.div> */}
-
-                  {/* Code visualization */}
-                  {/* <div className="relative z-10 mt-4">
-                    <motion.div
-                      className="inline-block text-4xl mb-4"
-                      animate={{
-                        rotate: [0, 360],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{
-                        rotate: {
-                          duration: 20,
-                          repeat: Infinity,
-                          ease: "linear",
-                        },
-                        scale: {
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        },
-                      }}
-                    >
-                      <i className="fas fa-code text-[#4c75ff]"></i>
-                    </motion.div> */}
-
-                    {/* Code editor style container */}
-                    <div className="bg-[#1E93B]/50 rounded-xl p-4 backdrop-blur-sm border border-[#39509A]/20">
-                      {/* Code header */}
-                      <div className="flex items-center space-x-2 mb-3">
-                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      </div>
-
-                      {/* Code content */}
-                      {/* <div className="font-mono text-sm space-y-2">
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.5 }}
-                          className="flex items-center"
-                        >
-                          <span className="text-[#39509A]">const</span>
-                          <span className="text-green-500 ml-2">future</span>
-                          <span className="text-[#39509A]/80 ml-2">=</span>
-                          <span className="text-[#39509A]/80 ml-2">await</span>
-                          <span className="text-yellow-500 ml-2">corevana</span>
-                          <span className="text-[#39509A]/80">.</span>
-                          <span className="text-blue-400">build</span>
-                          <span className="text-[#39509A]/80">(</span>
-                          <span className="text-purple-400">yourIdea</span>
-                          <span className="text-[#39509A]/80">);</span>
-                        </motion.div>
-
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.7 }}
-                          className="flex items-center"
-                        >
-                          <span className="text-[#39509A]">const</span>
-                          <span className="text-green-500 ml-2">result</span>
-                          <span className="text-[#39509A]/80 ml-2">=</span>
-                          <span className="text-yellow-500 ml-2">future</span>
-                          <span className="text-[#39509A]/80">.</span>
-                          <span className="text-blue-400">transform</span>
-                          <span className="text-[#39509A]/80">(</span>
-                          <span className="text-purple-400">innovation</span>
-                          <span className="text-[#39509A]/80">);</span>
-                        </motion.div>
-
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.9 }}
-                          className="flex items-center"
-                        >
-                          <span className="text-[#39509A]">console</span>
-                          <span className="text-[#39509A]/80">.</span>
-                          <span className="text-blue-400">log</span>
-                          <span className="text-[#39509A]/80">(</span>
-                          <span className="text-green-500">result</span>
-                          <span className="text-[#39509A]/80">);</span>
-                        </motion.div>
-                      </div> */}
-                      <div className="bg-gray-900 text-green-400 font-mono p-6 rounded-lg shadow-xl border border-green-500 w-full max-w-xl mx-auto">
-  <div className="mb-2 text-sm text-gray-400">corevana@digital ~ $</div>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.5 }}
-    className="whitespace-pre-wrap"
-  >
-    $ initializing your digital vision...
-  </motion.p>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1 }}
-    className="whitespace-pre-wrap"
-  >
-    $ connecting to innovation engine...
-  </motion.p>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1.5 }}
-    className="whitespace-pre-wrap"
-  >
-    $ deploying smart technology ⚙️
-  </motion.p>
-
-  <motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 2 }}
-    className="text-blue-400 font-bold mt-4"
-  >
-    ✔ Success: Corevana is now powering your business 🚀
-  </motion.p>
-</div>
-
-                    </div>
-
-                    {/* Tagline */}
-                    <motion.div
-                      className="my-4 text-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.1 }}
-                    >
-                      <div className="font-tech text-xl font-medium  dark:text-white">
-                        One Stop Solution For everything
-                      </div>
-                    </motion.div>
-                  </div>
-                {/* </div> */}
-              </motion.div>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#39509A] to-[#39509A]/80 rounded-2xl -z-10 opacity-50 blur-2xl"></div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            transition={{ delayChildren: 0.6, staggerChildren: 0.1 }}
+          <motion.p
+            className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-xl"
+            variants={childVariant}
           >
+            Empowering your business growth through creative, high-quality digital solutions that drive impact and lasting success.
+          </motion.p>
 
-              {/* ------------------------------------------ shirkadaha --------------------------------------------- */}
-
-            {/* {partners.map((partner, index) => (
-              <motion.div
-                key={index}
-                className="flex justify-center"
-                variants={childVariant}
-              >
-                <div className="h-7 text-[#39509A]/60 dark:text-[#39509A]/40 flex items-center">
-                  <i className={`${partner.icon} text-xl mr-2`}></i>
-                  <span className="font-medium text-sm">{partner.name}</span>
-                </div>
-              </motion.div>
-            ))} */}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section
-        id="services"
-        className="py-20 bg-white dark:bg-[#1E293B] relative overflow-hidden"
-      >
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#39509A]/5 animate-pulse"></div>
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#39509A]/5 animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-full bg-[#39509A]/5 animate-pulse delay-2000"></div>
-        </div>
-
-
-
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="mb-16 items-center"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}>
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex w-24 mx-auto items-center px-4 py-2 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-10">
-              <i className="fas fa-info-circle text-center mr-2"></i>
-              About
-            </motion.div>
-            <div className="sm:flex gap-36 ">
-              <div>
-                <motion.h2
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent">
-                  Who We Are
-                </motion.h2>
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="sm:text-3xl text-lg md:text-lg mb-4 sm:w-[500px]  text-slate-600 dark:text-slate-400 ">
-                  At Corevana , we are driven by innovation, powered by passion, and committed to delivering excellence. Founded in 2024, we began as a small startup with a bold vision: to transform the way businesses leverage technology. Today, we stand as a trusted leader in the tech industry, providing cutting-edge solutions that empower clients to thrive in a rapidly evolving digital world.
-                </motion.p>
-              </div>
-              <div>
-                <motion.h2
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent flex items-center gap-2"><Target className="text-[#325fff]"/>
-                  Mission
-                  </motion.h2>
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mt-2">
-                  To provide our clients with innovative, high-quality, and affordable design and development services that meet their business needs.
-                </motion.p>
-
-                <motion.h2
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="text-3xl md:text-4xl font-bold mb-4 mt-6 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent flex items-center gap-2"><Eye className="text-[#325fff]"/>
-                  Vision
-                </motion.h2>
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }} 
-                  className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mt-2">
-                    To become the leading technology solutions provider in Africa, delivering high-quality, globally competitive digital services
-                </motion.p>
-            </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+            variants={childVariant}
           >
             <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-6"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <i className="fas fa-cogs mr-2"></i>
+              <NavLink to="/contact"
+                className="inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-[#325fff] hover:bg-[#4c75ff]/90 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Get Started
+                <i className="fas fa-arrow-right ml-2"></i>
+              </NavLink>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <NavLink to="/services"
+              className="inline-flex justify-center items-center px-6 py-3 border-2 border-[#4c75ff] text-base font-medium rounded-xl text-[#4c75ff] hover:bg-[#39509A]/10 shadow-lg hover:shadow-xl transition-all duration-300">
               Our Services
-            </motion.div>
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent"
-            >
-              What We Offer
-            </motion.h2>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
-            >
-              Comprehensive solutions to help your business grow in the digital age. From high-quality web development to modern and effective services – we've got it all ready for you.
-            </motion.p>
+            </NavLink>
           </motion.div>
+        </motion.div>
+      </motion.div>
+
+      <motion.div className="md:w-1/2 relative" variants={childVariant}>
+        <motion.div
+          className="relative"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="w-full h sm:h-80 bg-gradient-to-br rom-[#4c75ff]/20 to-[#4c75ff]/10 dark:from-[#4c75ff]/10 dark:to-[#4c75ff]/5 rounded-2xl overflow-hidden p-5 backdrop-blur-sm border border-[#39509A]/10 dark:border-[#39509A]/20 shadow-xl">
+            {/* Animated background elements */}
+            <motion.div className="absolute inset-0"
+              animate={{
+                background: [
+                  "radial-gradient(circle at 0% 0%, #39509A10 0%, transparent 50%)",
+                  "radial-gradient(circle at 100% 100%, #39509A10 0%, transparent 50%)",
+                  "radial-gradient(circle at 0% 0%, #39509A10 0%, transparent 50%)",
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+
+            {/* Code editor style container */}
+            <div className="bg-[#1E93B]/50 rounded-xl p-4 backdrop-blur-sm border border-[#39509A]/20">
+              {/* Code header */}
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+
+              <div className="bg-gray-900 text-green-400 font-mono p-6 rounded-lg shadow-xl border border-green-500 w-full max-w-xl mx-auto">
+            <div className="mb-2 text-sm text-gray-400">corevana@digital ~ $</div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="whitespace-pre-wrap"
+            >
+              $ initializing your digital vision...
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="whitespace-pre-wrap"
+            >
+              $ connecting to innovation engine...
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+              className="whitespace-pre-wrap"
+            >
+              $ deploying smart technology ⚙️
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2 }}
+              className="text-blue-400 font-bold mt-4"
+            >
+              ✔ Success: Corevana is now powering your business 🚀
+            </motion.p>
+          </div>
+
+        </div>
+
+        {/* Tagline */}
+        <motion.div
+          className="my-4 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1 }}
+        >
+          <div className="font-tech text-xl font-medium  dark:text-white">
+            Elevate your business – modern design, solid technology.
+          </div>
+        </motion.div>
+      </div>
+      {/* </div> */}
+      </motion.div>
+        <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-[#39509A] to-[#39509A]/80 rounded-2xl -z-10 opacity-50 blur-2xl"></div>
+      </motion.div>
+      </motion.div>
+
+      <motion.div
+        className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        transition={{ delayChildren: 0.6, staggerChildren: 0.1 }}
+      >
+
+      {/* ------------------------------------------ shirkadaha --------------------------------------------- */}
+
+      {/* {partners.map((partner, index) => (
+        <motion.div
+          key={index}
+          className="flex justify-center"
+          variants={childVariant}
+        >
+        <div className="h-7 text-[#39509A]/60 dark:text-[#39509A]/40 flex items-center">
+          <i className={`${partner.icon} text-xl mr-2`}></i>
+          <span className="font-medium text-sm">{partner.name}</span>
+        </div>
+        </motion.div>
+        ))} */}
+        </motion.div>
+        </div>
+  </section>
+
+  {/* Services Section */}
+  <section id="services"
+    className="py-20 bg-white dark:bg-[#1E293B] relative overflow-hidden"
+  >
+  {/* Background decorative elements */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#39509A]/5 animate-pulse"></div>
+    <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#39509A]/5 animate-pulse delay-1000"></div>
+    <div className="absolute top-1/2 right-1/4 w-64 h-64 rounded-full bg-[#39509A]/5 animate-pulse delay-2000"></div>
+  </div>
+
+  <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      className="mb-16 items-center"
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}>
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="flex w-24 mx-auto items-center px-4 py-2 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-10">
+        <i className="fas fa-info-circle text-center mr-2"></i>
+        About
+      </motion.div>
+      <div className="sm:flex gap-36 ">
+        <div>
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent">
+            Who We Are
+          </motion.h2>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="sm:text-3xl text-lg md:text-lg mb-4 sm:w-[500px]  text-slate-600 dark:text-slate-400 ">
+            At Corevana , we are driven by innovation, powered by passion, and committed to delivering excellence. Founded in 2024, we began as a small startup with a bold vision: to transform the way businesses leverage technology. Today, we stand as a trusted leader in the tech industry, providing cutting-edge solutions that empower clients to thrive in a rapidly evolving digital world.
+          </motion.p>
+        </div>
+        <div>
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent flex items-center gap-2"><Target className="text-[#325fff]"/>
+          Mission
+        </motion.h2>
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mt-2">
+          To provide our clients with innovative, high-quality, and affordable design and development services that meet their business needs.
+        </motion.p>
+
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold mb-4 mt-6 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent flex items-center gap-2"><Eye className="text-[#325fff]"/>
+          Vision
+        </motion.h2>
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }} 
+          className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg mt-2">
+            To become the leading technology solutions provider in Africa, delivering high-quality, globally competitive digital services
+        </motion.p>
+      </div>
+    </div>
+    </motion.div>
+    </div>
+
+    <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        className="text-center mb-16"
+        initial={{ y: 50, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+      <motion.div
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="inline-flex items-center px-4 py-2 rounded-full bg-[#39509A]/10 text-[#325fff] text-sm font-medium mb-6"
+      >
+        <i className="fas fa-cogs mr-2"></i>
+        Our Services
+      </motion.div>
+      <motion.h2
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        viewport={{ once: true }}
+        className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#4c75ff] to-[#325fff]/80 bg-clip-text text-transparent"
+      >
+        What We Offer
+      </motion.h2>
+      <motion.p
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
+        className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+      >
+        Comprehensive solutions to help your business grow in the digital age. From high-quality web development to modern and effective services – we've got it all ready for you.
+      </motion.p>
+    </motion.div>
 
           {/* Service Categories Filter */}
           <motion.div
@@ -698,13 +598,12 @@ useEffect(() => {
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Link
-                      href={service.link}
+                    <NavLink to="/services"
                       className="inline-flex items-center text-[#325fff] hover:text-[#39509A]/80 font-medium group"
                     >
                       Learn more
                       <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                    </Link>
+                    </NavLink>
                   </motion.div>
                 </div>
 
@@ -723,12 +622,11 @@ useEffect(() => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Link
-              href="/contact"
+            <NavLink to="/contact"
               className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-white bg-[#325fff] hover:bg-[#4c75ff]/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <i className="fas fa-comments mr-2"></i>
               Talk to an expert
-            </Link>
+            </NavLink>
           </motion.div>
         </div>
       </section>
@@ -773,7 +671,7 @@ useEffect(() => {
 
           {/* Statistics Grid */}
           <motion.div
-            className="grid sm:grid-cols-2 md:grid-cols-2 gap-x-0 gap-y-2 mb-16"
+            className="grid sm:grid-cols-2 gap-3 mx-auto mb-20 w-[1000px]"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -782,42 +680,28 @@ useEffect(() => {
           >
             {[
               {
-                number: "100+",
-                label: "Projects Completed",
                 h: " Trusted Expertise",
                 p: "With years of experience in tech and design, we deliver reliable solutions that meet real business needs",
-                // icon: "fas fa-check-circle",
               },
-              { number: "50+", label: "Happy Clients",
+              {
                 h: " Creative & Clean Design",
                 p: "From websites to user interfaces, we focus on clarity, creativity, and a smooth user experience.",
-                // icon: "fas fa-users" 
               },
-              { number: "24/7", label: "Support",
+              {
                 h: "  Secure & Modern Technologies",
                 p: "Your security is our priority. We use the latest tools and best practices to keep your data and systems safe.",
-                // icon: "fas fa-headset" 
               },
               {
-                number: "5+",
-                label: "Years Experience",
                 h: " Custom & Scalable Solutions",
                 p: "Every business is different. We build technology that grows with you, tailored to your specific goals.",
-                // icon: "fas fa-calendar-alt",
               },
               {
-                number: "5+",
-                label: "Years Experience",
                 h: " Strong Communication",
                 p: "We value transparency and clear communication to keep you informed at every stage of the project.",
-                // icon: "fas fa-calendar-alt",
               },
               {
-                number: "5+",
-                label: "Years Experience",
                 h: "Timely & Reliable Execution",
                 p: "We deliver projects when promised  with speed, precision, and attention to quality.",
-                // icon: "fas fa-calendar-alt",
               },
             ].map((stat, index) => (
               <motion.div
@@ -826,16 +710,10 @@ useEffect(() => {
                 variants={childVariant}
               >
                 <div className="sm:w-[450px] h-[150px] mx-auto mb-4 rounded-xl bg-slate-50 shadow-lg flex flex-col px-3 items-center justify-center">
-                  {/* <h1 className={`${stat.h} text-[#39509A] text-2xl`}></h1> */}
                   <h1 className="text-2xl font-bold text-[#4c75ff]">{stat.h}</h1>
                   <p className="text-slate-600 dark:text-slate-400 leading-relaxed mt-1">{stat.p}</p>
                 </div>
-                {/* <div className="text-3xl font-bold text-[#39509A] mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-slate-600 dark:text-slate-400">
-                  {stat.label}
-                </div> */}
+                
               </motion.div>
             ))}
           </motion.div>
@@ -867,7 +745,7 @@ useEffect(() => {
               {[
                 {
                   name: "Starter",
-                  price: "150",
+                  price: "250",
                   description: "Perfect for small businesses and startups",
                   features: [
                     "Simple Logo Design",
@@ -881,7 +759,7 @@ useEffect(() => {
                 },
                 {
                   name: "Professional",
-                  price: "400",
+                  price: "500",
                   description: "Ideal for growing businesses",
                   features: [
                     "Business Profile Book Design",
@@ -930,9 +808,6 @@ useEffect(() => {
                       <span className="text-4xl font-bold text-[#325fff]">
                         ${plan.price}
                       </span>
-                      <span className="text-slate-600 dark:text-slate-400 ml-2">
-                        /month
-                      </span>
                     </div>
                     <p className="text-slate-600 dark:text-slate-400">
                       {plan.description}
@@ -952,8 +827,7 @@ useEffect(() => {
                   </div>
 
                   {/* CTA Button */}
-                  <Link
-                    href="/contact"
+                  <NavLink to="/contact"
                     className={`block w-full py-3 px-6 rounded-xl text-center font-medium transition-all duration-300 ${
                       plan.popular
                         ? "bg-[#325fff] text-white hover:bg-[#4c75ff]/90"
@@ -961,7 +835,7 @@ useEffect(() => {
                     }`}
                   >
                     Get Started
-                  </Link>
+                  </NavLink>
                 </motion.div>
               ))}
             </motion.div>
@@ -1269,13 +1143,12 @@ useEffect(() => {
                   Let's discuss how our solutions can help you achieve your
                   goals.
                 </p>
-                <Link
-                  href="/contact"
+                <NavLink to="/contact"
                   className="inline-flex justify-center items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-[#325fff bg-white hover:bg-slate-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   Get in Touch
                   <i className="fas fa-arrow-right ml-2"></i>
-                </Link>
+                </NavLink>
               </div>
             </div>
           </motion.div>

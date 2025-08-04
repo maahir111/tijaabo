@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 
 // Responsive feature list component
@@ -49,6 +50,22 @@ const services: Service[] = [
   //     "Conversational AI & Chatbots",
   //   ],
   // },
+  {
+    id: "Camera",
+    icon: "fas fa-video",
+    color: "[#39509A]",
+    title: "Camera & vedio editing",
+    description: 
+    "Professional video shooting and editing services using high-quality cameras and modern editing tools to create stunning, cinematic content tailored to your vision.",
+    features: [
+      "High-quality video shooting (HD & 4K resolution)",
+      "Professional video editing with smooth transitions",
+      "Color correction & grading for cinematic looks",
+      "Audio enhancement and noise reduction",
+      "Green screen (chroma key) effects",
+      "Social media ready formats (YouTube, Instagram, TikTok)",
+    ],
+  },
   {
     id: "web",
     icon: "fas fa-code",
@@ -480,21 +497,20 @@ const ServicesPage = () => {
                         {service.description}
                       </p>
                       <div className="flex flex-wrap gap-4">
-                        <Link
-                          href="/contact"
+                        <NavLink to="/contact"
                           className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-[#325fff] hover:bg-[#325fff]/90 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 relative overflow-hidden group"
                         >
                           <span className="relative z-10">Get Started</span>
                           <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
                           <div className="absolute inset-0 bg-gradient-to-r from-[#39509A]/0 via-white/10 to-[#39509A]/0 opacity-0 group-hover:opacity-100 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-all duration-1000"></div>
-                        </Link>
-                        <a
+                        </NavLink>
+                        {/* <a
                           href="#"
                           className="inline-flex items-center justify-center px-6 py-3 border-2 border-[#325fff] text-base font-medium rounded-xl text-[#325fff] hover:bg-[#39509A]/10 transition-all duration-300 hover:scale-105 group"
                         >
                           <span>Learn More</span>
                           <i className="fas fa-info-circle ml-2 group-hover:rotate-12 transition-transform duration-300"></i>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
 
@@ -548,18 +564,16 @@ const ServicesPage = () => {
               services can help you achieve your business goals.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
+              <NavLink to="/contact"
                 className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-white bg-[#325fff] hover:bg-[#325fff]/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Contact Our Team <i className="fas fa-arrow-right ml-2"></i>
-              </Link>
-              <a
-                href="#"
+              </NavLink>
+              <NavLink to="/portfolio"
                 className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-[#325fff] bg-white dark:bg-[#1E293B] border-2 border-[#325fff] hover:bg-[#39509A]/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 View Portfolio <i className="fas fa-images ml-2"></i>
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

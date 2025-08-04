@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Facebook } from "lucide-react";
+import { NavLink } from "react-router-dom";
+
 
 const About = () => {
   const { scrollYProgress } = useScroll();
@@ -64,7 +66,7 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex justify-center gap-4"
             >
-              <Link href="/contact">
+              <NavLink to="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -72,8 +74,8 @@ const About = () => {
                 >
                   Get in Touch
                 </motion.button>
-              </Link>
-              <Link href="/services">
+              </NavLink>
+              <NavLink to="/services">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -81,7 +83,7 @@ const About = () => {
                 >
                   Our Services
                 </motion.button>
-              </Link>
+              </NavLink>
             </motion.div>
           </motion.div>
         </div>
@@ -369,16 +371,16 @@ const About = () => {
                   github: "#",
                 },
               },
-              {
-                name: "Ali Mahomed daqare",
-                role: "Tech Consultant & Social Media Manager",
-                image: "https://i.postimg.cc/7Z3NGf92/6c10037d-6fdc-4e65-b2d9-25c69681e4c6.jpg",
-                social: {
-                  linkedin: "#",
-                  facebook: "#",
-                  github: "#",
-                },
-              },
+              // {
+              //   name: "Ali Mahomed daqare",
+              //   role: "Tech Consultant & Social Media Manager",
+              //   image: "https://i.postimg.cc/7Z3NGf92/6c10037d-6fdc-4e65-b2d9-25c69681e4c6.jpg",
+              //   social: {
+              //     linkedin: "#",
+              //     facebook: "#",
+              //     github: "#",
+              //   },
+              // },
               
             ].map((member, index) => (
               <motion.div
@@ -387,9 +389,9 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-[#1E293B]/50 w-[350px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="bg-white dark:bg-[#1E293B]/50 w-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="relative h- overflow-hidden">
+                <div className="relative  overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
@@ -447,7 +449,7 @@ const About = () => {
                 Let's discuss how we can help transform your business with our
                 innovative solutions.
               </p>
-              <Link href="/contact">
+              <NavLink to="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -455,7 +457,7 @@ const About = () => {
                 >
                   Get in Touch
                 </motion.button>
-              </Link>
+              </NavLink>
             </div>
           </motion.div>
         </div>
