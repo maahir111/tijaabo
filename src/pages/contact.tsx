@@ -182,7 +182,7 @@ function ContactPage() {
                       Email
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      info@corevana.com
+                      info@corevanatech.com
                     </p>
                   </div>
                 </div>
