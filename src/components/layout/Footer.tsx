@@ -144,7 +144,7 @@ const Footer = () => {
                 },
                 {
                   icon: "fas fa-envelope",
-                  text: "info@corevana.com",
+                  text: "info@corevanatech.com",
                 },
                 {
                   icon: "fas fa-clock",
