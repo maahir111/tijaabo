@@ -1076,17 +1076,17 @@ return (
           </motion.div>
 
           {/* Testimonials */}
-          <div className="relative overflow-hidden min-h-[300px]">
+          <div className="relative overflow-hidden min-h-[600px] sm:min-h-[200px]">
             <AnimatePresence initial={false}>
               <motion.div
                 key={current}
-                className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-8"
                 style={{ position: "absolute", width: "100%" }}
                 variants={variants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.7, ease: "easeInOut" }}
+                transition={{ duration: 0.50, ease: "easeInOut" }}
               >
                 {visibleTestimonials.map((testimonial, index) => (
                   <div key={testimonial._id || index} className="bg-white dark:bg-[#1E293B]/50 rounded-2xl p-6 shadow-lg border border-slate-200/50 dark:border-slate-800/50">
