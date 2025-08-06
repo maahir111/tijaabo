@@ -671,7 +671,7 @@ return (
 
           {/* Statistics Grid */}
           <motion.div
-            className="grid sm:grid-cols-2 gap-3 mx-auto mb-20 w-[1000px]"
+            className="grid sm:grid-cols-2 gap-3 mx-auto mb-20 sm:w-[1000px]"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"

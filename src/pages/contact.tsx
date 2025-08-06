@@ -103,7 +103,7 @@ function ContactPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-[#325fff] mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-[#325fff] my-6">
               Get in Touch
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">

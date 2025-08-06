@@ -338,7 +338,7 @@ const ServicesPage = () => {
           ></div>
         </div>
 
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 mt-10">
           <div className="text-center max-w-4xl mx-auto">
             {/* Small decorative line and text */}
             <div className="flex items-center justify-center mb-6">

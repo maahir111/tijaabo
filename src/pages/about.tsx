@@ -389,7 +389,7 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-[#1E293B]/50 w-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="bg-white dark:bg-[#1E293B]/50 sm:w-[450px] w-[350px]  rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <div className="relative  overflow-hidden">
                   <img
