@@ -42,21 +42,27 @@ function AddProjectPage() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      if (file.size > MAX_FILE_SIZE) {
-        setError("File size should be less than 5MB");
-        return;
-      }
-      if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-        setError("Only JPG, PNG and GIF files are allowed");
-        return;
-      }
-      setImage(file);
-      setCurrentImageUrl("");
-      setError("");
-    }
-  };
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  // File size check
+  if (file.size > MAX_FILE_SIZE) {
+    setError("File size should be less than 5MB");
+    return;
+  }
+
+  // File type check
+  if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+    setError("Only JPG, PNG and GIF files are allowed");
+    return;
+  }
+
+  // Success
+  setImage(file);
+  setCurrentImageUrl(URL.createObjectURL(file)); // preview
+  setError("");
+};
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
