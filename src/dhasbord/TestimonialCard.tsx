@@ -6,7 +6,8 @@ type Testimonial = {
   _id: string;
   fullName: string;
   subject: string;
-  text: string;
+  title: string;
+  message: string;
   rating: number;
   image: string;
 };
@@ -18,7 +19,7 @@ type Props = {
 };
 
 function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
-  const { _id, fullName, subject, text, rating, image } = testimonial;
+  const { _id, fullName, subject, title, message, rating, image } = testimonial;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
@@ -31,8 +32,8 @@ function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
       )}
       <div className="space-y-2">
         <h3 className="text-xl font-semibold">{fullName}</h3>
-        <p className="text-gray-600 font-medium">{subject}</p>
-        <p className="text-gray-700">{text}</p>
+        <p className="text-gray-600 font-medium">{title}</p>
+        <p className="text-gray-700">{message}</p>
         <div className="flex items-center">
           <span className="text-yellow-500" aria-label="Rating star">★</span>
           <span className="ml-1 text-gray-600">{rating}/5</span>
