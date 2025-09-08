@@ -55,7 +55,7 @@ function AddProjectPage() {
     }
   }, [id]);
 
-const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setError("");
   setLoading(true);
@@ -95,12 +95,13 @@ const handleSubmit = async (e: React.FormEvent) => {
     alert(`Project ${id ? "updated" : "added"} successfully!`);
     navigate("/admin/dashboard");
     
-  } catch (err) {
+} catch (err: unknown) {
+  if (err instanceof Error) {
     setError(err.message || "Failed to save project. Please try again.");
-  } finally {
-    setLoading(false);
+  } else {
+    setError("Failed to save project. Please try again.");
   }
-};
+}
 
   const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageUrl(e.target.value);

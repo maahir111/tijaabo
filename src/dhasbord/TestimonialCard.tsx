@@ -5,7 +5,6 @@ import { API_BASE_URL } from './config';
 type Testimonial = {
   _id: string;
   fullName: string;
-  subject: string;
   title: string;
   message: string;
   rating: number;

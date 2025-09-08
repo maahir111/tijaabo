@@ -7,8 +7,8 @@ const AddTestimonialPage = () => {
   const { id } = useParams();
 
   const [fullName, setFullName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [image, setImage] = useState<File | null>(null);
   const [currentImageUrl, setCurrentImageUrl] = useState("");
@@ -19,8 +19,8 @@ const AddTestimonialPage = () => {
         .then((res) => res.json())
         .then((data) => {
           setFullName(data.fullName);
-          setSubject(data.subject);
-          setText(data.text);
+          setTitle(data.subject);
+          setMessage(data.text);
           setRating(data.rating);
           setCurrentImageUrl(data.image);
         });
@@ -32,8 +32,8 @@ const AddTestimonialPage = () => {
 
     const formData = new FormData();
     formData.append("fullName", fullName);
-    formData.append("subject", subject);
-    formData.append("text", text);
+    formData.append("title", title);
+    formData.append("message", message);
     formData.append("rating", rating.toString());
 
     if (image) {
@@ -91,15 +91,15 @@ const AddTestimonialPage = () => {
         <input
           className="border p-2 w-full"
           placeholder="Subject"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           required
         />
         <textarea
           className="border p-2 w-full"
           placeholder="Text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           required
         />
         <input
