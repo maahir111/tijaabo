@@ -202,6 +202,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       </form>
     </div>
   );
-}
+}}
 
 export default AddProjectPage;
