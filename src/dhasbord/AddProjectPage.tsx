@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_BASE_URL } from './config';
+import { API_BASE_URL } from "./config";
 
-function AddProjectPage() {
+const AddProjectPage: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const { id } = useParams();
 
+  const navigate = useNavigate();
+  const { id } = useParams<{ id?: string }>();
+
+  // Fetch project details if editing
   const fetchProject = async () => {
     try {
       const token = localStorage.getItem("adminToken");
@@ -27,18 +29,18 @@ function AddProjectPage() {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (response.status === 401) {
         localStorage.removeItem("adminToken");
         setError("Session expired. Please login again.");
         navigate("/admin/login");
         return;
       }
-      
+
       if (!response.ok) {
         throw new Error("Failed to fetch project");
       }
-      
+
       const data = await response.json();
       setTitle(data.title);
       setDescription(data.description);
@@ -50,58 +52,53 @@ function AddProjectPage() {
   };
 
   useEffect(() => {
-    if (id) {
-      fetchProject();
-    }
+    if (id) fetchProject();
   }, [id]);
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setError("");
-  setLoading(true);
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
-  const token = localStorage.getItem("adminToken");
-  if (!token) {
-    setError("Please login first");
-    navigate("/admin/login");
-    setLoading(false);
-    return;
-  }
-
-  const projectData = {
-    title,
-    description,
-    link,
-    image: imageUrl
-  };
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/projects${id ? `/${id}` : ''}`, {
-      method: id ? "PUT" : "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(projectData),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      // Backend error response
-      throw new Error(data.error || data.message || "Something went wrong");
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      setError("Please login first");
+      navigate("/admin/login");
+      setLoading(false);
+      return;
     }
 
-    alert(`Project ${id ? "updated" : "added"} successfully!`);
-    navigate("/admin/dashboard");
-    
-} catch (err: unknown) {
-  if (err instanceof Error) {
-    setError(err.message || "Failed to save project. Please try again.");
-  } else {
-    setError("Failed to save project. Please try again.");
-  }
-}
+    const projectData = { title, description, link, image: imageUrl };
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/projects${id ? `/${id}` : ""}`,
+        {
+          method: id ? "PUT" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(projectData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || "Something went wrong");
+      }
+
+      alert(`Project ${id ? "updated" : "added"} successfully!`);
+      navigate("/admin/dashboard");
+    } catch (err: unknown) {
+      if (err instanceof Error) setError(err.message);
+      else setError("Failed to save project. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageUrl(e.target.value);
@@ -113,13 +110,13 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       <h1 className="text-2xl font-bold mb-4">
         {id ? "Edit Project" : "Add New Project"}
       </h1>
-      
+
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-2 font-medium">Title:</label>
@@ -132,7 +129,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             placeholder="Enter project title"
           />
         </div>
-        
+
         <div>
           <label className="block mb-2 font-medium">Description:</label>
           <textarea
@@ -144,7 +141,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             placeholder="Enter project description"
           />
         </div>
-        
+
         <div>
           <label className="block mb-2 font-medium">Link:</label>
           <input
@@ -156,7 +153,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             placeholder="https://example.com"
           />
         </div>
-        
+
         <div>
           <label className="block mb-2 font-medium">Image URL:</label>
           <input
@@ -173,24 +170,24 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 src={imageUrl}
                 alt="Preview"
                 className="max-w-xs h-auto border border-gray-300 rounded"
-                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
+                  target.style.display = "none";
                 }}
               />
             </div>
           )}
         </div>
-        
+
         <div className="flex space-x-4">
           <button
             type="submit"
             disabled={loading}
             className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Processing..." : (id ? "Update Project" : "Add Project")}
+            {loading ? "Processing..." : id ? "Update Project" : "Add Project"}
           </button>
-          
+
           <button
             type="button"
             onClick={() => navigate("/admin/dashboard")}
@@ -202,6 +199,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       </form>
     </div>
   );
-}}
+};
 
 export default AddProjectPage;
