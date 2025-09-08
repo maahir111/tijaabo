@@ -6,8 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 type TestimonialType = {
   _id: string;
   fullName: string;
-  subject: string;
-  text: string;
+  title: string;
+  message: string;
   rating: number;
   image: string;
 };
@@ -23,27 +23,28 @@ export default function MessagesPage() {
     // eslint-disable-next-line
   }, []);
 
-  const fetchTestimonials = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-        }
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setTestimonials(data);
-      } else {
-        setError(data.message || "Failed to fetch testimonials");
+// Beddel
+const fetchTestimonials = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
       }
-    } catch (error) {
-      console.error(error);
-      setError("Error fetching testimonials");
-    } finally {
-      setLoading(false);
+    });
+    const data = await response.json();
+    if (response.ok) {
+      setTestimonials(data);
+    } else {
+      setError(data.message || "Failed to fetch testimonials");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setError("Error fetching testimonials");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this testimonial?")) {

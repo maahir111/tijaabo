@@ -55,7 +55,7 @@ function AddProjectPage() {
     }
   }, [id]);
 
-const handleSubmit = async (e) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setError("");
   setLoading(true);
@@ -102,7 +102,7 @@ const handleSubmit = async (e) => {
   }
 };
 
-  const handleImageUrlChange = (e) => {
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageUrl(e.target.value);
     setError("");
   };
@@ -172,8 +172,9 @@ const handleSubmit = async (e) => {
                 src={imageUrl}
                 alt="Preview"
                 className="max-w-xs h-auto border border-gray-300 rounded"
-                onError={(e) => {
-                  e.target.style.display = 'none';
+                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
                 }}
               />
             </div>

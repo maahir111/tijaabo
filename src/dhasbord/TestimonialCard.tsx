@@ -19,7 +19,7 @@ type Props = {
 };
 
 function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
-  const { _id, fullName, subject, title, message, rating, image } = testimonial;
+  const { _id, fullName, title, message, rating, image } = testimonial;
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4">
