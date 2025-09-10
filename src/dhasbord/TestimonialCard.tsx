@@ -32,8 +32,8 @@ function TestimonialCard({ testimonial, onDelete, onEdit }: Props) {
       <div className="space-y-2">
         <h3 className="text-xl font-semibold">{fullName}</h3>
         <p className="text-gray-600 font-medium">{title}</p>
-        {/* <p className="text-gray-700">{message}</p> */}
-        <p className="text-gray-700">wee ku mahadsan yihiin team ka shirkada corevana sida ay ikaaga caawiyeen system keygma maqaaxida eee jida restrount pos </p>
+        <p className="text-gray-700">{message}</p>
+        {/* <p className="text-gray-700">wee ku mahadsan yihiin team ka shirkada corevana sida ay ikaaga caawiyeen system keygma maqaaxida eee jida restrount pos </p> */}
         <div className="flex items-center">
           <span className="text-yellow-500" aria-label="Rating star">★</span>
           <span className="ml-1 text-gray-600">{rating}/5</span>

@@ -21,8 +21,8 @@ type Testimonial = {
   _id: string;
   image: string;
   fullName: string;
-  subject: string;
-  text: string;
+  title: string;
+  message: string;
   rating: number;
 };
 
@@ -1099,12 +1099,12 @@ return (
                       <div>
                         <h4 className="font-semibold">{testimonial.fullName}</h4>
                         <p className="text-sm text-slate-600 dark:text-slate-400">
-                          {testimonial.subject}
+                          {testimonial.title}
                         </p>
                       </div>
                     </div>
                     <p className="text-slate-600 dark:text-slate-400 italic">
-                      "{testimonial.text}"
+                      "{testimonial.message}"
                     </p>
                     <div className="mt-4 flex text-[#325fff]">
                       <span className="text-yellow-500">★</span>
